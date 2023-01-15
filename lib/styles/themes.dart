@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shop_app/styles/colors.dart';
 
 ThemeData darkTheme = ThemeData(
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       bodyText1: TextStyle(
         fontFamily: 'Jannah',
         fontSize: 18.0,
@@ -18,16 +19,16 @@ ThemeData darkTheme = ThemeData(
         color: Colors.white,
       ),
     ),
-    primarySwatch: Colors.deepOrange,
+    primarySwatch: defaultColor,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.deepOrange,
+        selectedItemColor: defaultColor,
         backgroundColor: HexColor('333739'),
         elevation: 20.0),
     appBarTheme: AppBarTheme(
-      iconTheme: IconThemeData(color: Colors.white),
-      titleTextStyle: TextStyle(
+      iconTheme: const IconThemeData(color: Colors.white),
+      titleTextStyle: const TextStyle(
         fontFamily: 'Jannah',
         color: Colors.white,
         fontWeight: FontWeight.bold,
@@ -43,7 +44,7 @@ ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: HexColor('333739'));
 
 ThemeData lightTheme = ThemeData(
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       bodyText1: TextStyle(
         fontFamily: 'Jannah',
         fontSize: 18.0,
@@ -58,13 +59,13 @@ ThemeData lightTheme = ThemeData(
         color: Colors.black,
       ),
     ),
-    primarySwatch: Colors.deepOrange,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    primarySwatch: defaultColor,
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.deepOrange,
         elevation: 20.0),
     scaffoldBackgroundColor: Colors.white,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(color: Colors.black),
       titleTextStyle: TextStyle(
         fontFamily: 'Jannah',
