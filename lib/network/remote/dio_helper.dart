@@ -26,13 +26,11 @@ class DioHelper {
   }) async
   {
 
-    dio!.options = BaseOptions(
-      headers:
-{
-  'lang':'en',
-  'Authorization': token,
-        },
-    );
+    dio!.options .headers ={
+
+      'lang':'en',
+      'Authorization': token,
+    };
 
     return await dio!.get(
       url,
@@ -50,13 +48,12 @@ class DioHelper {
     String? token ,
   }) async {
 
-    dio!.options = BaseOptions(
-      headers:
-      {
+    dio!.options.headers ={
+
         'lang':'en',
         'Authorization': token,
-      },
-    );
+      };
+
 
     return await dio!.post(
       url,

@@ -70,6 +70,15 @@ class LoginScreen extends StatelessWidget {
                         defaultTextFormField(
                             controller: passController,
                             textInputType: TextInputType.visiblePassword,
+                            onSubmit: (value)
+                            {
+                              if (formKey.currentState!.validate())
+                              {
+                                ShopLoginCubit.get(context).userLogin(email: emailController.text, password: passController.text,
+                                );
+                              }
+                            },
+                            //ispassword: true,
                             label: "Password",
                             validate: (value) {
                               if (value.isEmpty) {
