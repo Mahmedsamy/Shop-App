@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/modules/on_boarding_screen.dart';
-import 'package:shop_app/network/dio_helper.dart';
+import 'package:shop_app/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/bloc_observer.dart';
 import 'package:shop_app/styles/themes.dart';
 
