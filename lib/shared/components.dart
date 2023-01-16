@@ -2,10 +2,10 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/styles/colors.dart';
-//import 'package:udemy_flutter/layout/news_app/cubit/cubit.dart';
+//import 'package:udemy_flutter/layout/news_app/cubit/cubitt.dart';
 //import 'package:udemy_flutter/modules/news_app/web_view/web_view.dart';
 //import 'package:udemy_flutter/shared/components/constants.dart';
-//import 'package:udemy_flutter/shared/cubit/cubit.dart';
+//import 'package:udemy_flutter/shared/cubit/cubitt.dart';
 //import 'package:udemy_flutter/shared/style/icon_broken.dart';
 
 Widget defaultButton(

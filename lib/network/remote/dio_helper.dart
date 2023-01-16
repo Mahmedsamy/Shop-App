@@ -9,7 +9,10 @@ class DioHelper
   {
     dio = Dio(
       BaseOptions(
-        baseUrl: '  ',
+        baseUrl: ' https://student.valuxapps.com/api/ ',
+        headers: {
+          'Content-type':'application/json',
+        },
         receiveDataWhenStatusError: true,
       ),
     );
@@ -27,3 +30,17 @@ class DioHelper
     );
    }
 }
+
+    static Future<Response> postData({
+
+        required String url,
+        Map<String,dynamic>? query,
+     required  Map<String , dynamic> data,
+}) async{
+
+  return dio.post(
+  url,
+  queryParameters: query,
+  data: data,
+  );
+  }
