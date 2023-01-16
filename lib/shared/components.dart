@@ -28,7 +28,7 @@ Widget defaultButton(
       ),
     );
 
-Widget defaultTextButton(
+  Widget defaultTextButton(
     {required VoidCallback? onPress, required String text}) =>
     TextButton(
       onPressed: onPress,
@@ -37,7 +37,7 @@ Widget defaultTextButton(
       ),
     );
 
-Widget defaultTextFormField(
+  Widget defaultTextFormField(
     {required TextEditingController controller,
       required TextInputType textInputType,
       ValueChanged? onSubmit,
