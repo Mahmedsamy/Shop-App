@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/modules/login/login_screen.dart';
 import 'package:shop_app/modules/on_boarding_screen.dart';
+import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:shop_app/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/bloc_observer.dart';
 import 'package:shop_app/styles/themes.dart';
@@ -14,14 +13,16 @@ void main() async {
 
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
-  //awit CacheHelper.init();
+  await CacheHelper.init();
 
-  //bool isDark = CacheHelper.getBoolean (key: 'isDark');
+  // bool isDark = CacheHelper.getBoolean (key: 'isDark');
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
 
 
  // final bool isDark;
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
                 theme: lightTheme ,
                 darkTheme: darkTheme ,
                 //themeMode: AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
-                  home :  LoginScreen(),
+                  home :  const OnBoardingScreen(),
     );
   // },
   // ),

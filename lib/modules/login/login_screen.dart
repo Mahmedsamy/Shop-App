@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart%20';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/modules/login/cubitt.dart';
 import 'package:shop_app/modules/login/state.dart';
 import 'package:shop_app/modules/register_screen.dart';
@@ -21,7 +22,40 @@ class LoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => ShopLoginCubit() ,
       child: BlocConsumer <ShopLoginCubit, ShopLoginState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is ShopLoginSuccessState)
+          {
+            if (state.loginModel.status!)
+            {
+              debugPrint(state.loginModel.message);
+              debugPrint(state.loginModel.data?.token);
+
+              Fluttertoast.showToast(
+                  msg: "state.loginModel.message",
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 5,
+                  backgroundColor: Colors.green,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
+            } else
+            {
+              debugPrint(state.loginModel.message);
+              Fluttertoast.showToast(
+                  msg: "state.loginModel.message",
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 5,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
+            }
+
+          }
+        },
+
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(),
@@ -38,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                           'Login',
                           style: Theme.of(context).textTheme.headline5,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20.0,
                         ),
                         Text(
@@ -47,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                             color: Colors.grey,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30.0,
                         ),
 
@@ -63,7 +97,7 @@ class LoginScreen extends StatelessWidget {
                             },
                             prefix: Icons.email_outlined),
 
-                        SizedBox(
+                        const SizedBox(
                           height: 30.0,
                         ),
 
@@ -103,12 +137,12 @@ class LoginScreen extends StatelessWidget {
                            text: 'login',
                            isUpperCace: true,
                          ),
-                          fallback: (context) => Center(child: CircularProgressIndicator()),
+                          fallback: (context) => const Center(child: CircularProgressIndicator()),
                         ),
 
 
 
-                        SizedBox(
+                        const SizedBox(
                           height: 30.0,
                         ),
 
@@ -117,13 +151,13 @@ class LoginScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('dont have an account?'),
+                            const Text('dont/t have an account?'),
 
                             defaultTextButton(
                                 onPress: () {
                                   navigateTo(
                                       context,
-                                      RegisterScreen());
+                                      const RegisterScreen());
                                 },
                                 text: 'Register Here')
                           ],
