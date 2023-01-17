@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/modules/login/login_screen.dart';
 import 'package:shop_app/modules/on_boarding_screen.dart';
 import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:shop_app/network/remote/dio_helper.dart';
@@ -15,19 +16,28 @@ void main() async {
   DioHelper.init();
   await CacheHelper.init();
 
-  // bool isDark = CacheHelper.getBoolean (key: 'isDark');
+   bool isDark = CacheHelper.getData (key: 'isDark');
 
-  runApp(const MyApp());
+  bool onBoarding = CacheHelper.getData (key: 'onBoarding');
+
+
+
+  runApp(  MyApp(
+    isDark: isDark,
+    onBoarding: onBoarding,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  //const MyApp({super.key});
 
 
 
- // final bool isDark;
+  final bool isDark;
+  final bool onBoarding;
 
- // MyApp(this.isDark);
+   const MyApp
+      ({ required this.isDark, required this.onBoarding});
 
 
   // This widget is the root of your application.
@@ -49,7 +59,7 @@ class MyApp extends StatelessWidget {
                 theme: lightTheme ,
                 darkTheme: darkTheme ,
                 //themeMode: AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
-                  home :  const OnBoardingScreen(),
+                  home :  onBoarding ? LoginScreen() :   const OnBoardingScreen(),
     );
   // },
   // ),

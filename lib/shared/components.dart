@@ -1,5 +1,5 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/styles/colors.dart';
 //import 'package:udemy_flutter/layout/news_app/cubit/cubitt.dart';
@@ -214,15 +214,15 @@ void navigateTo(context, widget) =>
 void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
     context, MaterialPageRoute(builder: (context) => widget), (route) => false);
 
-//  void showToast({required String message, required ToastStates states}) =>
-//      Fluttertoast.showToast(
-//          msg: message,
-//          toastLength: Toast.LENGTH_LONG,
-//          gravity: ToastGravity.CENTER,
-//          fontSize: 16.0,
-//          timeInSecForIosWeb: 5,
-//
-//         backgroundColor: chooseToastColor(states));
+ void showToast({required String message, required ToastStates states}) =>
+     Fluttertoast.showToast(
+         msg: message,
+         toastLength: Toast.LENGTH_LONG,
+         gravity: ToastGravity.CENTER,
+         fontSize: 16.0,
+         timeInSecForIosWeb: 5,
+
+        backgroundColor: chooseToastColor(states));
 
 enum ToastStates { SUCCESS, ERROR, WARNING }
 

@@ -31,7 +31,7 @@ class LoginScreen extends StatelessWidget {
               debugPrint(state.loginModel.data?.token);
 
               Fluttertoast.showToast(
-                  msg: "state.loginModel.message",
+                  msg: "${state.loginModel.message}",
                   toastLength: Toast.LENGTH_LONG,
                   gravity: ToastGravity.BOTTOM,
                   timeInSecForIosWeb: 5,
@@ -43,7 +43,7 @@ class LoginScreen extends StatelessWidget {
             {
               debugPrint(state.loginModel.message);
               Fluttertoast.showToast(
-                  msg: "state.loginModel.message",
+                  msg: "${state.loginModel.message}",
                   toastLength: Toast.LENGTH_LONG,
                   gravity: ToastGravity.BOTTOM,
                   timeInSecForIosWeb: 5,
@@ -52,6 +52,19 @@ class LoginScreen extends StatelessWidget {
                   fontSize: 16.0
               );
             }
+
+          }
+          else if(state is ShopLoginErrorState) {
+
+            Fluttertoast.showToast(
+                msg: state.error,
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 5,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0
+            );
 
           }
         },

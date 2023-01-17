@@ -1,8 +1,6 @@
 import 'package:shop_app/models/login_model.dart';
 
-abstract class ShopLoginState {
-  var loginModel;
-}
+abstract class ShopLoginState {}
 
 class ShopLoginInitialState extends ShopLoginState {}
 
