@@ -16,9 +16,9 @@ void main() async {
   DioHelper.init();
   await CacheHelper.init();
 
-   bool isDark = CacheHelper.getData (key: 'isDark');
+   bool isDark = CacheHelper.getData (key: 'isDark')??false;
 
-  bool onBoarding = CacheHelper.getData (key: 'onBoarding');
+  bool onBoarding = CacheHelper.getData (key: 'onBoarding')??false;
 
 
 
