@@ -45,6 +45,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       body: 'On Board 3 Body',
     ),
   ];
+
   bool isLast = false;
 
   void submit() {

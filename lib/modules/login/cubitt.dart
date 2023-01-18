@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart ';
 import 'package:shop_app/models/login_model.dart';
 import 'package:shop_app/modules/login/state.dart';
@@ -29,7 +30,7 @@ class ShopLoginCubit extends Cubit<ShopLoginState>
           },
       ).then((value)
       {
-        print(value.data);
+        debugPrint(value.data);
 
         loginModel =ShopLoginModel.formJson(value.data);
 
@@ -37,7 +38,7 @@ class ShopLoginCubit extends Cubit<ShopLoginState>
         emit(ShopLoginSuccessState(loginModel!));
 
         }).catchError((error){
-        print(error.toString());
+        debugPrint(error.toString());
           emit(ShopLoginErrorState(error.toString()));
       });
   }

@@ -1,10 +1,11 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart%20';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/modules/login/cubitt.dart';
 import 'package:shop_app/modules/login/state.dart';
 import 'package:shop_app/modules/register_screen.dart';
+import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:shop_app/shared/components.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -24,50 +25,32 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer <ShopLoginCubit, ShopLoginState>(
         listener: (context, state) {
           if(state is ShopLoginSuccessState)
-          {
-            if (state.loginModel.status!)
-            {
-              debugPrint(state.loginModel.message);
-              debugPrint(state.loginModel.data?.token);
+        {
+        if (state.loginModel.status!)
+        {
+        debugPrint(state.loginModel.message);
+        debugPrint(state.loginModel.data?.token);
 
-              Fluttertoast.showToast(
-                  msg: "${state.loginModel.message}",
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.white,
-                  fontSize: 16.0
-              );
-            } else
-            {
-              debugPrint(state.loginModel.message);
-              Fluttertoast.showToast(
-                  msg: "${state.loginModel.message}",
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0
-              );
-            }
+        CacheHelper.saveData(
+        key: 'token',
+        value: state.loginModel.data?.token,
+        ).then( (value) {
+        navigateAndFinish(
+        context,
+        ShopLayout(),
+        );
+        });
+        } else {
+          debugPrint(state.loginModel.message);
 
-          }
-          else if(state is ShopLoginErrorState) {
+          showToast(
+              message: state.loginModel.message!,
+              states: ToastStates.ERROR,
+          );
+        }
+        }
+          },
 
-            Fluttertoast.showToast(
-                msg: state.error,
-                toastLength: Toast.LENGTH_LONG,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 5,
-                backgroundColor: Colors.red,
-                textColor: Colors.white,
-                fontSize: 16.0
-            );
-
-          }
-        },
 
         builder: (context, state) {
           return Scaffold(
