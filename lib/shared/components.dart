@@ -23,7 +23,7 @@ Widget defaultButton(
         onPressed: function,
         child: Text(
           text.toUpperCase(),
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     );
@@ -63,11 +63,11 @@ Widget defaultButton(
       enabled: isClickable,
       decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
           prefixIcon: Icon(prefix),
           suffixIcon:
           IconButton(onPressed: onPressSuffix, icon: Icon(suffixIcon))),
-      style: TextStyle(fontSize: 20.0),
+      style: const TextStyle(fontSize: 20.0),
     );
 
 // Widget buildTaskItem({required Map model, required BuildContext context}) =>

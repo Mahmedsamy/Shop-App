@@ -4,9 +4,9 @@ class ShopLoginModel {
   UserData? data;
 
   ShopLoginModel.formJson(Map<String, dynamic> json) {
-    this.status = json['status'];
-    this.message = json['message'];
-    this.data = json['data'] != null ? UserData.formJson(json['data']) : null;
+    status = json['status'];
+    message = json['message'];
+    data = json['data'] != null ? UserData.formJson(json['data']) : null;
   }
 }
 
@@ -24,13 +24,13 @@ class UserData {
 
 
   UserData.formJson(Map<String, dynamic> json) {
-    this.id = json['id'];
-    this.name = json['name'];
-    this.email = json['email'];
-    this.phone = json['phone'];
-    this.image = json['image'];
-    this.points = json['points'];
-    this.credit = json['credit'];
-    this.token = json['token'];
+    id = json['id'];
+    name = json['name'];
+    email = json['email'];
+    phone = json['phone'];
+    image = json['image'];
+    points = json['points'];
+    credit = json['credit'];
+    token = json['token'];
   }
 }
