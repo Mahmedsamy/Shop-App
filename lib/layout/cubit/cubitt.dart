@@ -8,6 +8,7 @@ import 'package:shop_app/modules/products_screen.dart';
 import 'package:shop_app/modules/settings_screen.dart';
 import 'package:shop_app/network/end_points.dart';
 import 'package:shop_app/network/remote/dio_helper.dart';
+import 'package:shop_app/shared/constants.dart';
 
 
 class ShopCubit extends Cubit<ShopStates>
@@ -39,7 +40,7 @@ class ShopCubit extends Cubit<ShopStates>
 
     DioHelper.getData(url: HOME, query: null,).then((value) {
 
-      print(homeModel.toString());
+      printFullText(homeModel.toString());
 
       homeModel = HomeModel.fromJson(value.data);
 
