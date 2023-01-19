@@ -7,6 +7,8 @@ import 'package:shop_app/modules/on_boarding_screen.dart';
 import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:shop_app/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/bloc_observer.dart';
+import 'package:shop_app/shared/cubit/app_cubit.dart';
+import 'package:shop_app/shared/cubit/states.dart';
 import 'package:shop_app/styles/themes.dart';
 
 
@@ -20,24 +22,27 @@ void main() async {
 
    bool isDark = CacheHelper.getData (key: 'isDark')??false;
 
-   Widget widget;
+  Widget widget;
 
   bool onBoarding = CacheHelper.getData (key: 'onBoarding')??false;
 
-  String token = CacheHelper.getData(key: 'token');
+  String token = CacheHelper.getData(key: 'token')??'';
 
   if (onBoarding != null)
     {
-      if (token != null) widget = ShopLayout();
-      else widget = LoginScreen();
+      if (token != null) {
+        widget = const ShopLayout();
+      } else {
+        widget = LoginScreen();
+      }
     } else
       {
-        widget = OnBoardingScreen();
+        widget = const OnBoardingScreen();
       }
 
-  runApp(  MyApp(
+  runApp(MyApp(
     isDark: isDark,
-    startWidget: widget,
+    widget: widget,
   ));
 }
 
@@ -47,44 +52,39 @@ class MyApp extends StatelessWidget {
 
 
   final bool isDark;
-  final bool onBoarding;
+  final Widget widget;
 
-   const MyApp
-      ({ required this.isDark, required this.onBoarding});
+   const MyApp({ required this.isDark, required this.widget});
 
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-      return  MultiBlocProvider(
-          providers: [
-            BlocProvider(
-                create: (BuildContext context) => ShopCubit()..getBusiness()),
-            BlocProvider(create: (BuildContext context) => ShopCubit()),
-            BlocProvider(
-                create: (BuildContext context) => ShopCubit()
-                  ..getHomeData()
-                  ..getCategoriesData()
-                  ..getFavoritesData()
-                  ..getUserData()),
-            BlocProvider(
-                create: (BuildContext context) => ShopCubit(),
-                  //..getUserData()
-                  //..getPosts()),
-          ),
+       return  MultiBlocProvider(
+           providers: [
+             BlocProvider(
+                 create: (BuildContext context) => AppCubit()),
+             BlocProvider(
+               create: (BuildContext context) => ShopCubit()
+                //   ..getHomeData()
+                //   ..getCategoriesData()
+                //  ..getFavoritesData()
+                // ..getUserData()
+             ),
+
           ],
-          child: BlocConsumer<AppCubit, AppStates>(
-          listener: (context, state) {},
-          builder: (context, state) {
+           child: BlocConsumer<AppCubit, AppStates>(
+           listener: (context, state) {},
+           builder: (context, state) {
              return MaterialApp(
                 debugShowCheckedModeBanner: false,
                 theme: lightTheme ,
                 darkTheme: darkTheme ,
                 //themeMode: AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
-                  home : startWidget(),
+                  home : const ShopLayout(),
     );
-   },
-   ),
+   }
+  ),
   );
 }
 }
