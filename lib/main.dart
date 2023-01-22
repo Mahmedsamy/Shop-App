@@ -7,6 +7,7 @@ import 'package:shop_app/modules/on_boarding_screen.dart';
 import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:shop_app/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/bloc_observer.dart';
+import 'package:shop_app/shared/constants.dart';
 import 'package:shop_app/shared/cubit/app_cubit.dart';
 import 'package:shop_app/shared/cubit/states.dart';
 import 'package:shop_app/styles/themes.dart';
@@ -17,6 +18,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   Bloc.observer = MyBlocObserver();
+
   DioHelper.init();
   await CacheHelper.init();
 
@@ -26,17 +28,15 @@ void main() async {
 
   bool onBoarding = CacheHelper.getData (key: 'onBoarding')??false;
 
-  String token = CacheHelper.getData(key: 'token')??'';
+   token = CacheHelper.getData(key: 'token')??'';
 
-  if (onBoarding != null)
-    {
-      if (token != null) {
+  if (onBoarding) {
+      if (token.isNotEmpty) {
         widget = const ShopLayout();
       } else {
         widget = LoginScreen();
       }
-    } else
-      {
+    } else {
         widget = const OnBoardingScreen();
       }
 
@@ -64,13 +64,13 @@ class MyApp extends StatelessWidget {
            providers: [
              BlocProvider(
                  create: (BuildContext context) => AppCubit()),
-             BlocProvider(
-               create: (BuildContext context) => ShopCubit()
-                //   ..getHomeData()
-                //   ..getCategoriesData()
-                //  ..getFavoritesData()
-                // ..getUserData()
-             ),
+             // BlocProvider(
+             //   create: (BuildContext context) => ShopCubit()
+             //       ..getHomeData()
+             //    //   ..getCategoriesData()
+             //    //  ..getFavoritesData()
+             //    // ..getUserData()
+             // ),
               BlocProvider(
               create: (BuildContext context) => ShopCubit()..getHomeData(),),
           ],
@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
                 theme: lightTheme ,
                 darkTheme: darkTheme ,
                 //themeMode: AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
-                  home : const ShopLayout(),
+                  home : widget,
     );
    }
   ),

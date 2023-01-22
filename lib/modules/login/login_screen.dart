@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
         ).then( (value) {
         navigateAndFinish(
         context,
-        ShopLayout(),
+        const ShopLayout(),
         );
         });
         } else {

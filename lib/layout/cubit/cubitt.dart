@@ -11,9 +11,8 @@ import 'package:shop_app/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/constants.dart';
 
 
-class ShopCubit extends Cubit<ShopStates>
-{
-  ShopCubit () : super (ShopInitialState());
+class ShopCubit extends Cubit<ShopStates> {
+  ShopCubit() : super (ShopInitialState());
 
   static ShopCubit get(context) => BlocProvider.of(context);
 
@@ -26,29 +25,30 @@ class ShopCubit extends Cubit<ShopStates>
     const FavoritesScreen (),
     const SettingsScreen(),
   ];
-  void changeBottom(int index)
-  {
+
+  void changeBottom(int index) {
     currentIndex = index;
     emit(ShopChangeBottomNavStates());
   }
 
-  HomeModel homeModel;
+  HomeModel? homeModel;
 
-  void getHomeData()
-  {
+  void getHomeData() {
     emit(ShopLoadingHomeDataState());
-
-    DioHelper.getData(url: HOME, query: null,).then((value) {
-
+    debugPrint("get Home Data ${token.isEmpty}");
+    DioHelper.getData(
+      url: HOME,
+      token: token,
+      query: null,
+    ).then((value) {
       printFullText(homeModel.toString());
 
       homeModel = HomeModel.fromJson(value.data);
 
       emit(ShopSuccesHomeDataState());
-    }).catchError(error)
-    {
-      print(error.toString());
-      emit(ShopErrorHomeState());
+    }).catchError((error) {
+      debugPrint(error.toString());
+      emit(ShopErrorHomeDataState());
     });
   }
 }
