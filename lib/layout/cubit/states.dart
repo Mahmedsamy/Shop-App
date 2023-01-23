@@ -13,3 +13,7 @@ class ShopLoadingHomeDataState extends ShopStates{}
 class ShopSuccesHomeDataState extends ShopStates{}
 
 class ShopErrorHomeDataState extends ShopStates{}
+
+class ShopSuccesCategoriesState extends ShopStates{}
+
+class ShopErrorCategoriesState extends ShopStates{}

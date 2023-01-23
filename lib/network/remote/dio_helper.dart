@@ -12,7 +12,7 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-        baseUrl: 'https://student.valuxapps.com/api/',
+        baseUrl: 'http://student.valuxapps.com/api/',
         receiveDataWhenStatusError: true,
       ));
   }
@@ -32,7 +32,12 @@ class DioHelper {
       'lang':'en',
       'Authorization': token,
     };
-
+    (dio?.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient dioClient) {
+      dioClient.badCertificateCallback =
+      ((X509Certificate cert, String host, int port) => true);
+      return dioClient;
+    };
     return await dio!.get(
       url,
       queryParameters: query,
@@ -44,7 +49,7 @@ class DioHelper {
     required String url,
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
-    String lang = 'ar',
+    String lang = 'en',
     String? token ,
   }) async {
     dio!.options.headers ={
@@ -52,12 +57,12 @@ class DioHelper {
       'Authorization': token??'',
       'Content-Type': 'application/json',
     };
-    // (dio?.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-    //     (HttpClient dioClient) {
-    //   dioClient.badCertificateCallback =
-    //   ((X509Certificate cert, String host, int port) => true);
-    //   return dioClient;
-    // };
+    (dio?.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient dioClient) {
+      dioClient.badCertificateCallback =
+      ((X509Certificate cert, String host, int port) => true);
+      return dioClient;
+    };
     return await dio!.post(
       url,
       data: data,
