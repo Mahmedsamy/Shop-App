@@ -29,6 +29,7 @@ void main() async {
   bool onBoarding = CacheHelper.getData (key: 'onBoarding')??false;
 
    token = CacheHelper.getData(key: 'token')??'';
+   debugPrint(token);
 
   if (onBoarding) {
       if (token.isNotEmpty) {
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
   final bool isDark;
   final Widget widget;
 
-   const MyApp({ required this.isDark, required this.widget});
+   const MyApp({super.key,  required this.isDark, required this.widget});
 
 
   // This widget is the root of your application.
@@ -72,7 +73,10 @@ class MyApp extends StatelessWidget {
              //    // ..getUserData()
              // ),
               BlocProvider(
-              create: (BuildContext context) => ShopCubit()..getHomeData(),),
+              create: (BuildContext context) => ShopCubit()
+                ..getHomeData()..getCategoriesModel(),
+
+              ),
           ],
            child: BlocConsumer<AppCubit, AppStates>(
            listener: (context, state) {},

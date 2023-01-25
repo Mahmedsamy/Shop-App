@@ -1,6 +1,5 @@
 
 
-import 'package:shop_app/layout/cubit/states.dart';
 
 abstract class ShopStates {}
 
@@ -17,3 +16,7 @@ class ShopErrorHomeDataState extends ShopStates{}
 class ShopSuccesCategoriesState extends ShopStates{}
 
 class ShopErrorCategoriesState extends ShopStates{}
+
+class ShopSuccesChangeFavoritesState extends ShopStates{}
+
+class ShopErrorChangeFavoritesState extends ShopStates{}

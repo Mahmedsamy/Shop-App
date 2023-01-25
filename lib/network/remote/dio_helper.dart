@@ -32,12 +32,6 @@ class DioHelper {
       'lang':'en',
       'Authorization': token,
     };
-    (dio?.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (HttpClient dioClient) {
-      dioClient.badCertificateCallback =
-      ((X509Certificate cert, String host, int port) => true);
-      return dioClient;
-    };
     return await dio!.get(
       url,
       queryParameters: query,
@@ -57,12 +51,7 @@ class DioHelper {
       'Authorization': token??'',
       'Content-Type': 'application/json',
     };
-    (dio?.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (HttpClient dioClient) {
-      dioClient.badCertificateCallback =
-      ((X509Certificate cert, String host, int port) => true);
-      return dioClient;
-    };
+
     return await dio!.post(
       url,
       data: data,
