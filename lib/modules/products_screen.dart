@@ -40,7 +40,7 @@ class ProductsScreen extends StatelessWidget {
           CarouselSlider(
               items: model.data!.banners!
                   .map((e) => Image(
-                image: NetworkImage(e.image!),
+                image: NetworkImage(e.image!.replaceFirst("s", "")),
                 width: double.infinity,
                 fit: BoxFit.cover,
               ))
@@ -138,7 +138,7 @@ class ProductsScreen extends StatelessWidget {
               alignment: AlignmentDirectional.bottomStart,
               children: [
                 Image(
-                  image: NetworkImage(model.image!),
+                  image: NetworkImage(model.image!.replaceFirst("s", "")),
                   width: double.infinity,
                   height: 200.0,
                 ),
@@ -241,7 +241,7 @@ class ProductsScreen extends StatelessWidget {
     alignment: Alignment.bottomCenter,
     children: [
       Image(
-        image: NetworkImage(categories.image!),
+        image: NetworkImage(categories.image!.replaceFirst("s", "")),
         width: 120.0,
         height: 120.0,
         fit: BoxFit.cover,

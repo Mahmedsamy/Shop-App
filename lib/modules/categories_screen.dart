@@ -25,7 +25,7 @@ class CategoriesScreen extends StatelessWidget {
      padding: const EdgeInsets.all(20.0),
      child: Row(
        children:  [
-         Image(image: NetworkImage(model.image!),
+         Image(image: NetworkImage(model.image!.replaceFirst("s", "")),
            width: 80.0,
            height: 80.0,
            fit: BoxFit.cover,

@@ -13,7 +13,7 @@ Widget defaultButton(
       Color background = defaultColor,
       double height = 50,
       required VoidCallback? function,
-      required String text, required bool isUpperCace}) =>
+      required String text, required bool isUpperCase}) =>
     Container(
       width: width,
       height: height,

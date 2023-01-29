@@ -21,7 +21,7 @@ class ShopLayout extends StatelessWidget {
           appBar: AppBar(
             title:  const Text(
             'SALLA'
-         ),
+            ),
             actions: [
               IconButton(
                 icon: Icon(Icons.search),
@@ -37,7 +37,7 @@ class ShopLayout extends StatelessWidget {
               cubit.changeBottom(index);
             },
             currentIndex: cubit.currentIndex ,
-      items: const [
+              items: const [
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
