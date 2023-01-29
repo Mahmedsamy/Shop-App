@@ -131,7 +131,7 @@ class LoginScreen extends StatelessWidget {
 
                            },
                            text: 'login',
-                           isUpperCace: true,
+                           isUpperCase: true,
                          ),
                           fallback: (context) => const Center(child: CircularProgressIndicator()),
                         ),

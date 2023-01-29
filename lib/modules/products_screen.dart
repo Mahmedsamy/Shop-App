@@ -207,6 +207,7 @@ class ProductsScreen extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
+                            ShopCubit.get(context).changeFavorities(model.id!);
                             print(model.id);
                           },
                         ),
