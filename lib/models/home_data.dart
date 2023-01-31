@@ -1,13 +1,13 @@
 import 'Banners.dart';
 import 'Products_model.dart';
 
-class Data {
-  Data({
+class HomeData {
+  HomeData({
       this.banners, 
       this.products, 
       this.ad,});
 
-  Data.fromJson(dynamic json) {
+  HomeData.fromJson(dynamic json) {
     if (json['banners'] != null) {
       banners = [];
       json['banners'].forEach((v) {
