@@ -5,6 +5,7 @@ import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/change_favorite_model.dart';
 import 'package:shop_app/models/fav_model.dart';
 import 'package:shop_app/models/home_model.dart';
+import 'package:shop_app/models/login_model.dart';
 import 'package:shop_app/modules/categories_screen.dart';
 import 'package:shop_app/modules/favorites_screen.dart';
 import 'package:shop_app/modules/products_screen.dart';
@@ -49,12 +50,12 @@ class ShopCubit extends Cubit<ShopStates> {
     ).then((value) {
       printFullText(homeModel.toString());
 
-      homeModel = HomeModel.fromJson(value.data);
+      homeModel = HomeModel.formJson(value.data);
 
-      homeModel?.data?.products?.forEach((element)
+      homeModel!.data!.products!.forEach((element)
       {
         favorites.addAll({
-          element.id!: element.inFavorites!,
+          element.id!: element.inFavourites!,
         });
       });
       debugPrint(favorites.toString());
@@ -103,8 +104,10 @@ class ShopCubit extends Cubit<ShopStates> {
      token: token,
     )
         .then((value) {
+
       changeFavoritesModel = ChangeFavoritesModel.fromJson(value.data);
-      print(value.data);
+
+      debugPrint(value.data);
 
        if (!changeFavoritesModel!.status!)
          {
@@ -122,7 +125,7 @@ class ShopCubit extends Cubit<ShopStates> {
 
   FavModel? favModel;
 
-  void getCFavoritiesModel()
+  void getFavoritiesModel()
    {
     DioHelper.getData(
       url: FAVORITES,
@@ -130,7 +133,9 @@ class ShopCubit extends Cubit<ShopStates> {
       query: null,
     ).then((value) {
       printFullText(favModel.toString());
+
       favModel = FavModel.fromJson(value.data);
+
       printFullText(value.data.toString());
 
       emit(ShopSuccesGetFavoritesState());
@@ -139,4 +144,32 @@ class ShopCubit extends Cubit<ShopStates> {
       emit(ShopErrorGetFavoritesState());
     });
   }
+
+
+  ShopLoginModel? userModel;
+
+  void getUserData()
+  {
+    emit(ShopLoadingUserDataState());
+    
+    DioHelper.getData(
+      url: PROFILE,
+      token: token,
+      query: null,
+    ).then((value) {
+
+      //printFullText(favModel.toString());
+
+      userModel = ShopLoginModel.formJson(value.data);
+
+      printFullText(userModel!.data!.name!);
+
+      emit(ShopSuccesUserDataState());
+    }).catchError((error) {
+      debugPrint(error.toString());
+      emit(ShopErrorUserDataState());
+    });
+  }
+
+
 }

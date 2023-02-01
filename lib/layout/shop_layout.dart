@@ -24,10 +24,10 @@ class ShopLayout extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                icon: Icon(Icons.search),
+                icon: const Icon(Icons.search),
                 onPressed: ()
                 {
-                navigateTo(context, SearchScreen(),);
+                navigateTo(context, const SearchScreen(),);
                 },
             ),],
           ),

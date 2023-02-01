@@ -21,15 +21,21 @@ class ShopErrorCategoriesState extends ShopStates{}
 
 class ShopSuccesChangeFavoritesState extends ShopStates
 {
-
   final ChangeFavoritesModel model;
 
   ShopSuccesChangeFavoritesState(this.model);
-
-
 }
 class ShopErrorChangeFavoritesState extends ShopStates{}
+
+class ShopLoadingGetFavoritesState extends ShopStates{}
 
 class ShopSuccesGetFavoritesState extends ShopStates{}
 
 class ShopErrorGetFavoritesState extends ShopStates{}
+
+
+class ShopLoadingUserDataState extends ShopStates{}
+
+class ShopSuccesUserDataState extends ShopStates{}
+
+class ShopErrorUserDataState extends ShopStates{}

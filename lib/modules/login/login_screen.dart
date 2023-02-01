@@ -13,6 +13,8 @@ class LoginScreen extends StatelessWidget {
 
   var formKey = GlobalKey<FormState>();
 
+  LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
 
@@ -88,8 +90,9 @@ class LoginScreen extends StatelessWidget {
                             validate: (value) {
                               if (value.isEmpty) {
                                 return 'please enter your email address';
-                              } else
+                              } else {
                                 return null;
+                              }
                             },
                             prefix: Icons.email_outlined),
 
@@ -113,8 +116,9 @@ class LoginScreen extends StatelessWidget {
                             validate: (value) {
                               if (value.isEmpty) {
                                 return 'please enter your Password';
-                              } else
+                              } else {
                                 return null;
+                              }
                             },
                             prefix: Icons.lock_outline),
 

@@ -18,7 +18,8 @@ class FavoritesScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return ListView.separated(
-          itemBuilder: (context, index) => buildFavItem(ShopCubit.get(context).favModel!.data.data[index]),
+          itemBuilder: (context, index) =>
+              buildFavItem(ShopCubit.get(context).favModel!.data.data[index]),
           separatorBuilder: (context, index) => divider(),
           itemCount: ShopCubit.get(context).categoriesModel!.data!.data!.length,
         );
@@ -28,7 +29,7 @@ class FavoritesScreen extends StatelessWidget {
   }
 
   Widget buildFavItem(FavData data) => Padding(
-    padding: const EdgeInsets.all(20.0),
+    padding:  const EdgeInsets.all(20.0),
     child: Container(
       height: 120.0,
       child: Row(
@@ -38,12 +39,12 @@ class FavoritesScreen extends StatelessWidget {
             alignment: AlignmentDirectional.bottomStart,
             children: [
                Image(
-                image: NetworkImage(data.product),
+                image: NetworkImage("https://student.valuxapps.com/storage/uploads/products/1615440322npwmU.71DVgBTdyLL._SL1500_.jpg".replaceFirst("s", "")),
                 fit: BoxFit.cover,
                 width: 120.0,
                 height: 120.0,
               ),
-              if (data.data.discount != 0)
+              if (1 != 0)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                   color: Colors.red,
@@ -111,7 +112,7 @@ class FavoritesScreen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        // ShopCubit.get(context).changeFavorities(model.id!);
+                        // ShopCubit.get(context).changeFavorites(model.id!);
                       },
                     ),
                   ],

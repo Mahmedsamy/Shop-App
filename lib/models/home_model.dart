@@ -3,8 +3,8 @@ class HomeModel {
   HomeDataModel? data;
 
   HomeModel.formJson(Map<String, dynamic> json) {
-    this.status = json['status'];
-    this.data = HomeDataModel.fromJson(json['data']);
+    status = json['status'];
+    data = HomeDataModel.fromJson(json['data']);
   }
 }
 

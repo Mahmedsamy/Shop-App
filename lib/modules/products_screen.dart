@@ -5,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart%20';
 import 'package:shop_app/layout/cubit/cubitt.dart';
 import 'package:shop_app/layout/cubit/states.dart';
 import 'package:shop_app/models/categories_model.dart';
-import 'package:shop_app/models/Products_model.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/shared/components.dart';
 import 'package:shop_app/shared/constants.dart';
+
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({Key? key}) : super(key: key);
@@ -16,43 +16,35 @@ class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
-
-        listener: (BuildContext context, Object? state) {
-          if (state is ShopSuccesChangeFavoritesState){
-            if(!state.model.status!) {
-              showToast(
-                message: state.model.message!,
-                states: ToastStates.ERROR,
-              );
-            }
-          }
-        },
-
-      builder: ( context, state) {
+      builder: (BuildContext context, state) {
         var cubit = ShopCubit.get(context);
 
         return ConditionalBuilder(
           condition: cubit.homeModel != null && cubit.categoriesModel != null,
           builder: (context) =>
-              productsBuilder(cubit.homeModel!, cubit.categoriesModel!, context,cubit),
-          fallback: (context) => const Center(
-              child: CircularProgressIndicator()
-          ),
+              productsBuilder(cubit.homeModel!, cubit.categoriesModel!, cubit),
+          fallback: (context) => const Center(child: CircularProgressIndicator()),
         );
+      },
+      listener: (BuildContext context, Object? state) {
+        if (state is ShopSuccesChangeFavoritesState) {
+          showToast(
+              message: state.model.message!,
+              states: ToastStates.ERROR);
+        }
       },
     );
   }
 
-
   Widget productsBuilder(
-      HomeModel model, CategoriesModel categoriesModel, context,ShopCubit cubit) =>
+      HomeModel model, CategoriesModel categoriesModel, ShopCubit cubit) =>
       SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           CarouselSlider(
               items: model.data!.banners!
                   .map((e) => Image(
-                image: NetworkImage(e.image!.replaceFirst("s", "")),
+                image: NetworkImage(e.image!.replaceFirst("s", "") ),
                 width: double.infinity,
                 fit: BoxFit.cover,
               ))
@@ -87,7 +79,7 @@ class ProductsScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10.0,
                 ),
-                SizedBox(
+                Container(
                   height: 120.0,
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
@@ -125,11 +117,11 @@ class ProductsScreen extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 2,
-              childAspectRatio: 1 / 1.9,
+              childAspectRatio: 1 / 1.56,
               children: List.generate(
                 model.data!.products!.length,
                     (index) =>
-                    buildGridProduct(model.data!.products! [index], context,cubit),
+                    buildGridProduct(model.data!.products![index], cubit),
               ),
             ),
           ),
@@ -137,8 +129,7 @@ class ProductsScreen extends StatelessWidget {
       );
 
   Widget buildGridProduct(
-      Products model,
-          context,
+      ProductsModel model,
       ShopCubit cubit,
       ) =>
       Container(
@@ -189,8 +180,8 @@ class ProductsScreen extends StatelessWidget {
                           maxLines: 2,
                           style: const TextStyle(
                               color: defaultColor,
-                              fontSize: 16.0,
-                              height: 1.0,
+                              fontSize: 14.0,
+                              height: 1.3,
                               fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(
@@ -204,42 +195,27 @@ class ProductsScreen extends StatelessWidget {
                             style: const TextStyle(
                                 color: Colors.grey,
                                 decoration: TextDecoration.lineThrough,
-                                fontSize: 10.0,
+                                fontSize: 14.0,
+                                height: 1.3,
                                 fontWeight: FontWeight.bold),
                           ),
                         const Spacer(),
-                        IconButton(
-                          icon: CircleAvatar(
-                            radius: 15.0,
-                            backgroundColor: ShopCubit.get(context).favorites[model.id!]! ? defaultColor : Colors.grey ,
-                            child: const Icon(
-                              Icons.favorite_border,
-                              size: 25.0,
+                        CircleAvatar(
+                          radius: 15,
+                          backgroundColor: cubit.favorites[model.id]!
+                              ? defaultColor
+                              : Colors.grey,
+                          child: IconButton(
+                            onPressed: () {
+                             // cubit.postFavorites(model.id!);
+                            },
+                            icon: const Icon(
+                              Icons.favorite_outline_rounded,
+                              size: 14,
                               color: Colors.white,
                             ),
                           ),
-                          onPressed: () {
-                            ShopCubit.get(context).changeFavorities(model.id!);
-                            print(model.id);
-                          },
-                        ),
-
-                        // CircleAvatar(
-                        //   radius: 15,
-                        //   backgroundColor: cubit.favorites[model.id]!
-                        //       ? defaultColor
-                        //       : Colors.grey,
-                        //   child: IconButton(
-                        //     onPressed: () {
-                        //       cubit.postFavorites(model.id!);
-                        //     },
-                        //     icon: Icon(
-                        //       Icons.favorite_outline_rounded,
-                        //       size: 14,
-                        //       color: Colors.white,
-                        //     ),
-                        //   ),
-                        // )
+                        )
                       ],
                     ),
                   ),

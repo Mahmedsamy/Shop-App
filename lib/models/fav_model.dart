@@ -1,16 +1,16 @@
 class FavModel {
   FavModel({
     required this.status,
-    this.message,
+    required this.message,
     required this.data,
   });
   late final bool status;
-  late final Null message;
+  late final String? message;
   late final FavData data;
 
   FavModel.fromJson(Map<String, dynamic> json){
     status = json['status'];
-    message = null;
+    message =  null ;
     data = FavData.fromJson(json['data']);
   }
 
@@ -31,10 +31,10 @@ class FavData {
     required this.from,
     required this.lastPage,
     required this.lastPageUrl,
-    this.nextPageUrl,
+    required this.nextPageUrl,
     required this.path,
     required this.perPage,
-    this.prevPageUrl,
+    required this.prevPageUrl,
     required this.to,
     required this.total,
   });
@@ -44,10 +44,10 @@ class FavData {
   late final int from;
   late final int lastPage;
   late final String lastPageUrl;
-  late final Null nextPageUrl;
+  late final String nextPageUrl;
   late final String path;
   late final int perPage;
-  late final Null prevPageUrl;
+  late final String prevPageUrl;
   late final int to;
   late final int total;
 
@@ -58,10 +58,10 @@ class FavData {
     from = json['from'];
     lastPage = json['last_page'];
     lastPageUrl = json['last_page_url'];
-    nextPageUrl = null;
+    nextPageUrl = String as String;
     path = json['path'];
     perPage = json['per_page'];
-    prevPageUrl = null;
+    prevPageUrl = String as String;
     to = json['to'];
     total = json['total'];
   }
