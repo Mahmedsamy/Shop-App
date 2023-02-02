@@ -134,95 +134,98 @@ class ProductsScreen extends StatelessWidget {
       ) =>
       Container(
         color: Colors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              alignment: AlignmentDirectional.bottomStart,
-              children: [
-                Image(
-                  image: NetworkImage(model.image!.replaceFirst("s", "")),
-                  width: double.infinity,
-                  height: 200.0,
-                ),
-                if (model.discount != 0)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                    color: Colors.red,
-                    child: Text(
-                      'discount'.toUpperCase(),
-                      style: const TextStyle(fontSize: 9.0, color: Colors.white),
-                    ),
-                  ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        child: Expanded(
+          flex: 1,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
+                alignment: AlignmentDirectional.bottomStart,
                 children: [
-                  Text(
-                    model.name!,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: const TextStyle(
-                        fontSize: 14.0,
-                        height: 1.3,
-                        fontWeight: FontWeight.bold),
+                  Image(
+                    image: NetworkImage(model.image!.replaceFirst("s", "")),
+                    width: double.infinity,
+                    height: 200.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          model.price!.toString(),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: const TextStyle(
-                              color: defaultColor,
-                              fontSize: 14.0,
-                              height: 1.3,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          width: 5.0,
-                        ),
-                        if (model.discount != 0)
+                  if (model.discount != 0)
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                      color: Colors.red,
+                      child: Text(
+                        'discount'.toUpperCase(),
+                        style: const TextStyle(fontSize: 9.0, color: Colors.white),
+                      ),
+                    ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      model.name!,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: const TextStyle(
+                          fontSize: 14.0,
+                          height: 1.3,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        children: [
                           Text(
-                            model.oldPrice!.toString(),
+                            model.price!.toString(),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: const TextStyle(
-                                color: Colors.grey,
-                                decoration: TextDecoration.lineThrough,
+                                color: defaultColor,
                                 fontSize: 14.0,
                                 height: 1.3,
                                 fontWeight: FontWeight.bold),
                           ),
-                        const Spacer(),
-                        CircleAvatar(
-                          radius: 15,
-                          backgroundColor: cubit.favorites[model.id]!
-                              ? defaultColor
-                              : Colors.grey,
-                          child: IconButton(
-                            onPressed: () {
-                             // cubit.postFavorites(model.id!);
-                            },
-                            icon: const Icon(
-                              Icons.favorite_outline_rounded,
-                              size: 14,
-                              color: Colors.white,
-                            ),
+                          const SizedBox(
+                            width: 5.0,
                           ),
-                        )
-                      ],
+                          if (model.discount != 0)
+                            Text(
+                              model.oldPrice!.toString(),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: const TextStyle(
+                                  color: Colors.grey,
+                                  decoration: TextDecoration.lineThrough,
+                                  fontSize: 14.0,
+                                  height: 1.3,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          const Spacer(),
+                          CircleAvatar(
+                            radius: 15,
+                            backgroundColor: cubit.favorites[model.id]!
+                                ? defaultColor
+                                : Colors.grey,
+                            child: IconButton(
+                              onPressed: () {
+                               // cubit.postFavorites(model.id!);
+                              },
+                              icon: const Icon(
+                                Icons.favorite_outline_rounded,
+                                size: 14,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       );
 

@@ -27,7 +27,7 @@ class ShopCubit extends Cubit<ShopStates> {
     const ProductsScreen(),
     const CategoriesScreen(),
     const FavoritesScreen (),
-    const SettingsScreen(),
+    SettingsScreen(),
   ];
 
   void changeBottom(int index) {
@@ -52,12 +52,11 @@ class ShopCubit extends Cubit<ShopStates> {
 
       homeModel = HomeModel.formJson(value.data);
 
-      homeModel!.data!.products!.forEach((element)
-      {
+      for (var element in homeModel!.data!.products!) {
         favorites.addAll({
           element.id!: element.inFavourites!,
         });
-      });
+      }
       debugPrint(favorites.toString());
 
       emit(ShopSuccesHomeDataState());
@@ -164,7 +163,7 @@ class ShopCubit extends Cubit<ShopStates> {
 
       printFullText(userModel!.data!.name!);
 
-      emit(ShopSuccesUserDataState());
+      emit(ShopSuccesUserDataState(userModel!));
     }).catchError((error) {
       debugPrint(error.toString());
       emit(ShopErrorUserDataState());
