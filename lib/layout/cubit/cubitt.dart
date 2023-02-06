@@ -48,7 +48,7 @@ class ShopCubit extends Cubit<ShopStates> {
       token: token,
       query: null,
     ).then((value) {
-      printFullText(homeModel.toString());
+    //  printFullText(homeModel.toString());
 
       homeModel = HomeModel.formJson(value.data);
 
@@ -76,7 +76,7 @@ class ShopCubit extends Cubit<ShopStates> {
       token: token,
       query: null,
     ).then((value) {
-      printFullText(categoriesModel.toString());
+     // printFullText(categoriesModel.toString());
 
       categoriesModel = CategoriesModel.fromJson(value.data);
 
@@ -131,11 +131,11 @@ class ShopCubit extends Cubit<ShopStates> {
       token: token,
       query: null,
     ).then((value) {
-      printFullText(favModel.toString());
+     // printFullText(favModel.toString());
 
       favModel = FavModel.fromJson(value.data);
 
-      printFullText(value.data.toString());
+      // printFullText(value.data.toString());
 
       emit(ShopSuccesGetFavoritesState());
     }).catchError((error) {
@@ -147,28 +147,69 @@ class ShopCubit extends Cubit<ShopStates> {
 
   ShopLoginModel? userModel;
 
-  void getUserData()
-  {
-    emit(ShopLoadingUserDataState());
-    
+  // void getUserData()
+  // {
+  //   emit(ShopLoadinGetUserDataState());
+  //
+  //   DioHelper.getData(
+  //     url: PROFILE,
+  //     token: token,
+  //     query: null,
+  //   ).then((value) {
+  //
+  //     //printFullText(favModel.toString());
+  //
+  //     userModel = ShopLoginModel.formJson(value.data);
+  //
+  //   //  printFullText(userModel!.data!.name!);
+  //
+  //     emit(ShopSuccessUserDataState(userModel!));
+  //   }).catchError((error) {
+  //     debugPrint(error.toString());
+  //     emit(ShopErrorUserDataState());
+  //   });
+  // }
+
+
+  void getUserData() {
+    emit(ShopLoadingGetUserDataState());
     DioHelper.getData(
-      url: PROFILE,
-      token: token,
-      query: null,
-    ).then((value) {
-
-      //printFullText(favModel.toString());
-
+        url: PROFILE,
+        query: null,
+        lang: 'en',
+        token: token)
+        .then((value) {
       userModel = ShopLoginModel.formJson(value.data);
-
-      printFullText(userModel!.data!.name!);
-
-      emit(ShopSuccesUserDataState(userModel!));
+      emit(ShopSuccessGetUserDataState(userModel!));
     }).catchError((error) {
-      debugPrint(error.toString());
-      emit(ShopErrorUserDataState());
+      emit(ShopErrorGetUserDataState(error.toString()));
     });
   }
 
+  void updateUserData({
+    required String name,
+    required String email,
+    required String phone,
+})
+{
+    emit(ShopLoadingUpdateUpdateUserState(userModel!));
+    DioHelper.putData(
+        url: UPDATE_PROFILE,
+        query: null,
+        lang: 'en',
+        token: token,
+        data: {
+          'name' : name,
+          'email' : email,
+          'phone' : phone,
+        },
+
+    ).then((value) {
+      userModel = ShopLoginModel.formJson(value.data);
+      emit(ShopLoadingUpdateUpdateUserState(userModel!));
+    }).catchError((error) {
+      emit(ShopErrorUpdateUserState(error.toString()));
+    });
+  }
 
 }

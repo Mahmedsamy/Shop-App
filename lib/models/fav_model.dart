@@ -10,7 +10,7 @@ class FavModel {
 
   FavModel.fromJson(Map<String, dynamic> json){
     status = json['status'];
-    message =  null ;
+    message =  json['message'] ;
     data = FavData.fromJson(json['data']);
   }
 

@@ -4,16 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart%20';
 import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/modules/login/cubitt.dart';
 import 'package:shop_app/modules/login/state.dart';
-import 'package:shop_app/modules/register_screen.dart';
+import 'package:shop_app/modules/register/register_screen.dart';
 import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:shop_app/shared/components.dart';
+import 'package:shop_app/shared/constants.dart';
 
 class LoginScreen extends StatelessWidget {
 
 
   var formKey = GlobalKey<FormState>();
 
-  LoginScreen({super.key});
+  LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +38,9 @@ class LoginScreen extends StatelessWidget {
         key: 'token',
         value: state.loginModel.data?.token,
         ).then( (value) {
+
+          token = state.loginModel.data?.token;
+
         navigateAndFinish(
         context,
         const ShopLayout(),
@@ -157,7 +161,7 @@ class LoginScreen extends StatelessWidget {
                                 onPress: () {
                                   navigateTo(
                                       context,
-                                      const RegisterScreen());
+                                      RegisterScreen());
                                 },
                                 text: 'Register Here')
                           ],

@@ -22,5 +22,5 @@ void printFullText(String text) {
   );
 }
 
-String token='';
+dynamic token='';
 String uId='';

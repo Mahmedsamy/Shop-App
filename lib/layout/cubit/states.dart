@@ -36,12 +36,68 @@ class ShopSuccesGetFavoritesState extends ShopStates{}
 class ShopErrorGetFavoritesState extends ShopStates{}
 
 
-class ShopLoadingUserDataState extends ShopStates{}
+// class ShopLoadingGetUserDataState extends ShopStates{}
+//
+// class ShopSuccesGetUserDataState extends ShopStates
+// {
+//    final ShopLoginModel loginModel;
+//
+//    ShopSuccesGetUserDataState(this.loginModel);}
+//
+// class ShopErrorGetUserDataState extends ShopStates{}
 
-class ShopSuccesUserDataState extends ShopStates
-{
-  final ShopLoginModel loginModel;
+class ShopLoadingGetUserDataState extends ShopStates {}
 
-  ShopSuccesUserDataState(this.loginModel);}
+class ShopSuccessGetUserDataState extends ShopStates {
+  final ShopLoginModel userModel;
 
-class ShopErrorUserDataState extends ShopStates{}
+  ShopSuccessGetUserDataState(this.userModel);
+}
+
+class ShopErrorGetUserDataState extends ShopStates {
+  final String error;
+
+  ShopErrorGetUserDataState(this.error);
+}
+
+class ShopLoadingUpdateUserDataState extends ShopStates {}
+
+class ShopSuccessUpdateUserDataState extends ShopStates {
+  final ShopLoginModel userModel;
+
+  ShopSuccessUpdateUserDataState(this.userModel);
+
+}
+
+class ShopErrorUpdateUserDataState extends ShopStates {
+  final String error;
+
+  ShopErrorUpdateUserDataState(this.error);
+}
+////////////////////////////////////////////////////
+
+
+
+class ShopSuccessUpdateUserState extends ShopStates {
+  late final ShopLoginModel userModel;
+
+  ShopSuccessUpdateUserState(this.userModel);
+}
+
+class ShopErrorUpdateUserState extends ShopStates {
+  late final String error;
+
+  ShopErrorUpdateUserState(this.error);
+}
+
+class ShopLoadingUpdateUpdateUserState extends ShopStates {
+  final ShopLoginModel userModel;
+
+  ShopLoadingUpdateUpdateUserState(this.userModel);
+}
+
+class ShopSuccessUpdateUpdateUserState extends ShopStates {
+  late final ShopLoginModel userModel;
+
+  ShopSuccessUpdateUpdateUserState(this.userModel);
+}
