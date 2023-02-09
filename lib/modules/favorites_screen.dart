@@ -102,7 +102,7 @@ class FavoritesScreen extends StatelessWidget {
                     IconButton(
                       icon: const CircleAvatar(
                         radius: 15.0,
-                        backgroundColor:  true //ShopCubit.get(context).favorites[model.id!]!
+                        backgroundColor:  true // ShopCubit.get(context).favorites[model.id!]!
                             ? defaultColor
                             : Colors.grey ,
                         child: Icon(
